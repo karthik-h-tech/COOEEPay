@@ -88,16 +88,18 @@ Without this, app uses a local fallback for checkout simulation.
 1. Launch app → Welcome screen → Tap “Get Started”.
 2. Select a plan (Free/Premium/Pro) → Enter promo code COOEE20 (optional).
 3. Proceed to payment confirmation → Confirm & Pay.
-4. Mock API simulates success or error → Displays confetti or error animation.
-5. Use “Return to Dashboard” to go back to welcome screen.
+   - For **Free plan**, payment is skipped; “Confirm & Pay” immediately activates the plan.
+   - For **Premium or Pro plans**, user selects a payment method → Mock API simulates success or error → Displays confetti or error animation.
+4. Use “Return to Dashboard” to go back to welcome screen.
 
 ## Advantages
 
 - **Easy to Understand**: Clear plan selection and payment flow.
-- **Reusable Components**: Widgets and dialogs are modular and maintainable.
-- **Engaging UI**: Lottie animations and confetti for success.
-- **Responsive**: Works across multiple devices.
-- **Mock API Ready**: Can integrate with real payment endpoints later.
+- **Reusable Components**: Widgets and dialogs are modular, maintainable, and structured for readability.
+- **Engaging UI**: Lottie animations and confetti for success improve user experience.
+- **Responsive Layout**: Optimized for various screen sizes and orientations for better accessibility.
+- **Mock API Ready**: Payment flow can integrate with real endpoints without affecting app structure.
+- **Structured Flow**: Free vs Paid plan logic ensures smooth user journey and avoids unnecessary steps.
 
 ## Dependencies
 

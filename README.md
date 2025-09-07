@@ -2,8 +2,6 @@
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.8.1+-blue.svg)](https://flutter.dev/)
 
-=======
-
 A Flutter app for plan selection and payment flow, designed for CallCooee's communication-focused audience. This app allows users to choose from Free, Premium, and Pro plans, apply promo codes, and simulate payment processing with a mock Stripe checkout API.
 
 ## Abstract

@@ -84,16 +84,66 @@ class _PaymentConfirmationScreenState extends ConsumerState<PaymentConfirmationS
           width: double.infinity,
           child: ElevatedButton(
             onPressed: state == PaymentState.loading ? null : () async {
-              ref.read(paymentStateProvider.notifier).state = PaymentState.loading;
-              final res = await PaymentService.checkout(planId: plan.id, amount: priceAfter, promo: promo.isEmpty ? null : promo);
-              if (res.success) {
+              if (priceAfter == 0) {
+                // Free plan, no payment needed
                 ref.read(paymentStateProvider.notifier).state = PaymentState.success;
-                ref.read(paymentMessageProvider.notifier).state = res.message;
+                ref.read(paymentMessageProvider.notifier).state = 'Free plan activated successfully!';
                 _confetti.play();
+                // Navigate to payment success screen with details
+                Navigator.pushNamed(context, '/payment-success', arguments: {
+                  'plan': plan,
+                  'priceAfter': priceAfter,
+                  'promo': promo,
+                  'message': 'Free plan activated successfully!',
+                });
               } else {
-                ref.read(paymentStateProvider.notifier).state = PaymentState.error;
-                ref.read(paymentMessageProvider.notifier).state = res.message;
-                _shake.forward(from: 0);
+                // Paid plan, show payment methods dialog
+                final paymentMethod = await showDialog<String>(
+                  context: context,
+                  builder: (_) => PaymentMethodDialog(),
+                );
+
+                if (paymentMethod != null) {
+                  ref.read(paymentStateProvider.notifier).state = PaymentState.loading;
+                  final res = await PaymentService.checkout(planId: plan.id, amount: priceAfter, promo: promo.isEmpty ? null : promo);
+                  if (res.success) {
+                    ref.read(paymentStateProvider.notifier).state = PaymentState.success;
+                    ref.read(paymentMessageProvider.notifier).state = res.message;
+                    _confetti.play();
+                    // Navigate to payment success screen with details
+                    Navigator.pushNamed(context, '/payment-success', arguments: {
+                      'plan': plan,
+                      'priceAfter': priceAfter,
+                      'promo': promo,
+                      'message': res.message,
+                    });
+                  } else {
+                    ref.read(paymentStateProvider.notifier).state = PaymentState.error;
+                    ref.read(paymentMessageProvider.notifier).state = res.message;
+                    _shake.forward(from: 0);
+                    // Show error dialog
+                    await showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: const Text('Payment Failed'),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            _maybeLottie('assets/animations/error.json', fallback: const Icon(Icons.error_outline, size: 88)),
+                            const SizedBox(height: 8),
+                            Text(res.message),
+                          ],
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                }
               }
             },
             child: AnimatedSwitcher(
@@ -104,8 +154,6 @@ class _PaymentConfirmationScreenState extends ConsumerState<PaymentConfirmationS
         ),
         const SizedBox(height: 10),
         TextButton(onPressed: () => Navigator.popUntil(context, (r) => r.isFirst), child: const Text('Return to Dashboard')),
-        const SizedBox(height: 12),
-        _statusView(state, msg),
       ]),
     );
   }
@@ -131,7 +179,7 @@ class _PaymentConfirmationScreenState extends ConsumerState<PaymentConfirmationS
         const SizedBox(height: 6),
         Text(msg, style: const TextStyle(color: Colors.white70)),
       ]);
-    } else {
+    } else if (state == PaymentState.error) {
       return Column(children: [
         _maybeLottie('assets/animations/error.json', fallback: const Icon(Icons.error_outline, size: 88)),
         const SizedBox(height: 8),
@@ -139,6 +187,8 @@ class _PaymentConfirmationScreenState extends ConsumerState<PaymentConfirmationS
         const SizedBox(height: 6),
         Text(msg, style: const TextStyle(color: Colors.white70)),
       ]);
+    } else {
+      return const SizedBox.shrink();
     }
   }
 
@@ -148,5 +198,56 @@ class _PaymentConfirmationScreenState extends ConsumerState<PaymentConfirmationS
     } catch (_) {
       return fallback;
     }
+  }
+}
+
+class PaymentMethodDialog extends StatefulWidget {
+  const PaymentMethodDialog({super.key});
+
+  @override
+  State<PaymentMethodDialog> createState() => _PaymentMethodDialogState();
+}
+
+class _PaymentMethodDialogState extends State<PaymentMethodDialog> {
+  String? _selectedMethod;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Select Payment Method'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          RadioListTile<String>(
+            title: const Text('Credit Card'),
+            value: 'credit_card',
+            groupValue: _selectedMethod,
+            onChanged: (value) => setState(() => _selectedMethod = value),
+          ),
+          RadioListTile<String>(
+            title: const Text('PayPal'),
+            value: 'paypal',
+            groupValue: _selectedMethod,
+            onChanged: (value) => setState(() => _selectedMethod = value),
+          ),
+          RadioListTile<String>(
+            title: const Text('Apple Pay'),
+            value: 'apple_pay',
+            groupValue: _selectedMethod,
+            onChanged: (value) => setState(() => _selectedMethod = value),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: _selectedMethod != null ? () => Navigator.pop(context, _selectedMethod) : null,
+          child: const Text('Pay Now'),
+        ),
+      ],
+    );
   }
 }

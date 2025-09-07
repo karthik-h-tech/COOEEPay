@@ -18,6 +18,8 @@ class PromoField extends StatelessWidget {
       controller: TextEditingController.fromValue(TextEditingValue(text: value, selection: TextSelection.collapsed(offset: value.length))),
       decoration: InputDecoration(
         hintText: 'Promo code (optional)',
+        filled: true,
+        fillColor: const Color(0xFF3A3A3A),
         suffixIcon: Padding(padding: const EdgeInsets.only(right: 8), child: suffix),
       ),
     );

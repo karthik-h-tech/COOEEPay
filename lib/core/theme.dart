@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const Color _brandPrimary = Color(0xFF635BFF);
-const Color _brandAccent = Color(0xFF00D4FF);
-const Color _bgDark = Color(0xFF0F1221);
+const Color _brandPrimary = Color(0xFF22C55E);
+const Color _brandAccent = Color(0xFF22C55E);
+const Color _bgDark = Color(0xFF000000);
 const Color _cardBg = Color(0xFF171827);
 const Color _success = Color(0xFF22C55E);
 const Color _error = Color(0xFFEF4444);

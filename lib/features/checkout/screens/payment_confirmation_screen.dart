@@ -64,7 +64,7 @@ class _PaymentConfirmationScreenState extends ConsumerState<PaymentConfirmationS
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Container(
           padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(color: const Color(0xFF181B2E), borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(color: const Color(0xFF3A3A3A), borderRadius: BorderRadius.circular(12)),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(children: [
               const Icon(Icons.receipt_long_outlined),

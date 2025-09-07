@@ -15,7 +15,10 @@ class PaymentSuccessScreen extends StatelessWidget {
     final String message = args['message'];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Payment Successful')),
+      appBar: AppBar(
+        title: const Text('Payment Successful'),
+        automaticallyImplyLeading: false,
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 560),
@@ -38,7 +41,7 @@ class PaymentSuccessScreen extends StatelessWidget {
                 const SizedBox(height: 32),
                 Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(color: const Color(0xFF181B2E), borderRadius: BorderRadius.circular(12)),
+                  decoration: BoxDecoration(color: const Color(0xFF3A3A3A), borderRadius: BorderRadius.circular(12)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

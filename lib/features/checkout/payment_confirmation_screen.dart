@@ -139,7 +139,7 @@ class _SummaryTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: const Color(0xFF181B2E),
+        color: const Color(0xFF3A3A3A), // ash color for better readability
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.white12),
       ),

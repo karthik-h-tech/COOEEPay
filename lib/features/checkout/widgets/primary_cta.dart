@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cooee_pay/core/theme.dart';
+import 'package:cooeepay/core/theme.dart';
 
 class PrimaryCta extends StatelessWidget {
   final String label;

@@ -1,7 +1,7 @@
-import 'package:cooee_pay/core/theme.dart';
-import 'package:cooee_pay/core/utils.dart';
-import 'package:cooee_pay/data/services/payment_service.dart';
-import 'package:cooee_pay/features/checkout/providers.dart';
+import 'package:cooeepay/core/theme.dart';
+import 'package:cooeepay/core/utils.dart';
+import 'package:cooeepay/features/checkout/services/payment_service.dart';
+import 'package:cooeepay/features/checkout/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';

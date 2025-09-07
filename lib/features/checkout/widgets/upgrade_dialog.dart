@@ -21,9 +21,9 @@ class UpgradeDialog extends StatelessWidget {
           const Text('Unlimited calls, HD quality, priority support — upgrade anytime.'),
           const SizedBox(height: 16),
           Row(children: [
-            Expanded(child: OutlinedButton(onPressed: () => Navigator.pop(context), child: const Text('Maybe later'))),
+            Expanded(child: OutlinedButton(onPressed: () => Navigator.pop(context, 'maybe_later'), child: const Text('Maybe later'))),
             const SizedBox(width: 12),
-            Expanded(child: ElevatedButton(onPressed: () => Navigator.pop(context), child: const Text('Upgrade'))),
+            Expanded(child: ElevatedButton(onPressed: () => Navigator.pop(context, 'upgrade'), child: const Text('Upgrade'))),
           ])
         ]),
       ),

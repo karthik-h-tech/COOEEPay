@@ -1,0 +1,61 @@
+import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:confetti/confetti.dart';
+
+class PaymentSuccessScreen extends StatefulWidget {
+  const PaymentSuccessScreen({super.key});
+
+  @override
+  State<PaymentSuccessScreen> createState() => _PaymentSuccessScreenState();
+}
+
+class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
+  late final ConfettiController confetti;
+
+  @override
+  void initState() {
+    super.initState();
+    confetti = ConfettiController(duration: const Duration(seconds: 2));
+    confetti.play();
+  }
+
+  @override
+  void dispose() {
+    confetti.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: ConfettiWidget(
+              confettiController: confetti,
+              blastDirectionality: BlastDirectionality.explosive,
+              numberOfParticles: 30,
+              shouldLoop: false,
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Lottie.asset("assets/animations/success.json", width: 200, height: 200, repeat: false),
+                const SizedBox(height: 16),
+                const Text("Payment Successful!", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                ElevatedButton(
+                  onPressed: () => Navigator.popUntil(context, (route) => route.isFirst),
+                  child: const Text("Return to Dashboard"),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

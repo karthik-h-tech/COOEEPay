@@ -88,7 +88,7 @@ Without this, app uses a local fallback for checkout simulation.
 ## Usage
 
 1. Launch app → Welcome screen → Tap “Get Started”.
-2. Select a plan (Free/Premium/Pro) → Enter promo code (optional).
+2. Select a plan (Free/Premium/Pro) → Enter promo code COOEE20 (optional).
 3. Proceed to payment confirmation → Confirm & Pay.
 4. Mock API simulates success or error → Displays confetti or error animation.
 5. Use “Return to Dashboard” to go back to welcome screen.

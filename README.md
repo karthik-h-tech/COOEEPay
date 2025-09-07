@@ -119,7 +119,4 @@ flutter test
 
 Contributions are welcome. Open an issue or submit a pull request for bug fixes, improvements, or new features.
 
-## License
-
-=======
 

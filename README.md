@@ -115,8 +115,6 @@ Without this, app uses a local fallback for checkout simulation.
 flutter test
 ```
 
-## Contributing
 
-Contributions are welcome. Open an issue or submit a pull request for bug fixes, improvements, or new features.
 
 

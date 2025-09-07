@@ -53,41 +53,76 @@ assets/
 │   └── error.json                       # Lottie animation for error.
 ├── images/
 │   └── cooeepay_logo.png                # App logo.
+Installation
+Prerequisites
+Flutter SDK (^3.8.1)
 
-## Getting Started
+Dart SDK
 
-### Prerequisites
-- Flutter SDK (^3.8.1)
-- Dart SDK
+Steps
+Clone the repository:
 
-### Installation
-1. Clone the repository.
-2. Run `flutter pub get` to install dependencies.
-3. Run `flutter run` to start the app on a connected device or emulator.
+bash
+Copy code
+git clone https://github.com/your-username/cooeepay.git
+cd cooeepay
+Install dependencies:
 
-### Configuration
-- To use a real mock API endpoint, set the `CHECKOUT_ENDPOINT` environment variable:
-  ```
-  flutter run --dart-define=CHECKOUT_ENDPOINT=https://your.mock/endpoint
-  ```
-- Without it, the app uses a local mock fallback.
+bash
+Copy code
+flutter pub get
+Run the app:
 
-## Project Structure
-- `lib/core/`: Theme, responsive utilities, and helpers.
-- `lib/features/checkout/`: Screens, widgets, models, providers, and services for the checkout flow.
-- `assets/animations/`: Lottie animations for success and error states.
+bash
+Copy code
+flutter run
+Configuration
+Optional: Use a real mock API endpoint:
 
-## Dependencies
-- flutter_riverpod: State management
-- google_fonts: Typography
-- confetti: Success animation
-- lottie: Custom animations
+bash
+Copy code
+flutter run --dart-define=CHECKOUT_ENDPOINT=https://your.mock/endpoint
+Without this, app uses a local fallback for checkout simulation.
 
-## Screenshots
-(Add screenshots here if available)
+Usage
+Launch app → Welcome screen → Tap “Get Started”.
 
-## Contributing
-Contributions are welcome. Please open an issue or submit a pull request.
+Select a plan (Free/Premium/Pro) → Enter promo code (optional).
 
-## License
-This project is licensed under the MIT License.
+Proceed to payment confirmation → Confirm & Pay.
+
+Mock API simulates success or error → Displays confetti or error animation.
+
+Use “Return to Dashboard” to go back to welcome screen.
+
+Advantages
+Easy to Understand: Clear plan selection and payment flow.
+
+Reusable Components: Widgets and dialogs are modular and maintainable.
+
+Engaging UI: Lottie animations and confetti for success.
+
+Responsive: Works across multiple devices.
+
+Mock API Ready: Can integrate with real payment endpoints later.
+
+Dependencies
+flutter_riverpod: State management
+
+google_fonts: Typography
+
+confetti: Success celebration
+
+lottie: Custom animations
+
+http: Mock API calls
+
+Running Tests
+bash
+Copy code
+flutter test
+Contributing
+Contributions are welcome. Open an issue or submit a pull request for bug fixes, improvements, or new features.
+
+License
+MIT License. See LICENSE for details
